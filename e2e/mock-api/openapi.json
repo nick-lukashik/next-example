@@ -1,0 +1,360 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/api/v1/notes": {
+            "get": {
+                "operationId": "NotesController_list_v1",
+                "parameters": [
+                    {
+                        "name": "x-request-id",
+                        "in": "header",
+                        "description": "Echoed back; generated when absent",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "default": 20,
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100
+                        }
+                    },
+                    {
+                        "name": "cursor",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 256
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NoteList"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation failed (VALIDATION_FAILED)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error (INTERNAL)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Newest notes first, cursor pagination (cached in Redis)",
+                "tags": ["notes"]
+            },
+            "post": {
+                "operationId": "NotesController_create_v1",
+                "parameters": [
+                    {
+                        "name": "x-request-id",
+                        "in": "header",
+                        "description": "Echoed back; generated when absent",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateNote"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Note"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation failed (VALIDATION_FAILED)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited (RATE_LIMITED)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error (INTERNAL)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Create a note; publishes notes.note.created.v1",
+                "tags": ["notes"]
+            }
+        },
+        "/api/v1/notes/stats": {
+            "get": {
+                "operationId": "NotesController_stats_v1",
+                "parameters": [
+                    {
+                        "name": "x-request-id",
+                        "in": "header",
+                        "description": "Echoed back; generated when absent",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NoteStats"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error (INTERNAL)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Counters maintained by the event → job pipeline",
+                "tags": ["notes"]
+            }
+        },
+        "/api/v1/notes/{id}": {
+            "get": {
+                "operationId": "NotesController_get_v1",
+                "parameters": [
+                    {
+                        "name": "x-request-id",
+                        "in": "header",
+                        "description": "Echoed back; generated when absent",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Note"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found (NOT_FOUND)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error (INTERNAL)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["notes"]
+            }
+        }
+    },
+    "info": {
+        "title": "Notes API",
+        "description": "The notes contract the frontend is built against. The mock API serves it at /openapi.json; `pnpm api:types` generates src/lib/api/schema.d.ts from it.",
+        "version": "dev",
+        "contact": {}
+    },
+    "tags": [],
+    "servers": [],
+    "components": {
+        "schemas": {
+            "NoteList": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Note"
+                        }
+                    },
+                    "nextCursor": {
+                        "nullable": true,
+                        "type": "string"
+                    }
+                },
+                "required": ["items", "nextCursor"],
+                "additionalProperties": false
+            },
+            "Note": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                    }
+                },
+                "required": ["id", "title", "body", "createdAt"],
+                "additionalProperties": false
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "enum": ["VALIDATION_FAILED", "NOT_FOUND", "RATE_LIMITED", "INTERNAL"]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "path": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["path", "message"],
+                            "additionalProperties": false
+                        }
+                    },
+                    "requestId": {
+                        "type": "string"
+                    }
+                },
+                "required": ["code", "message", "requestId"],
+                "additionalProperties": false
+            },
+            "NoteStats": {
+                "type": "object",
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 9007199254740991
+                    },
+                    "createdLastHour": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 9007199254740991
+                    }
+                },
+                "required": ["total", "createdLastHour"],
+                "additionalProperties": false
+            },
+            "CreateNote": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                    },
+                    "body": {
+                        "default": "",
+                        "type": "string",
+                        "maxLength": 5000
+                    }
+                },
+                "required": ["title"],
+                "additionalProperties": false
+            }
+        }
+    }
+}

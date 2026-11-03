@@ -1,0 +1,53 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+    "timezone": "Asia/Tbilisi",
+    "schedule": ["* 0-5 * * 1"],
+    "minimumReleaseAge": "3 days",
+    "internalChecksFilter": "strict",
+    "rangeStrategy": "pin",
+    "lockFileMaintenance": {
+        "enabled": true,
+        "schedule": ["* 0-5 * * 1"]
+    },
+    "packageRules": [
+        {
+            "description": "Every non-major update in one PR; majors keep their own PRs.",
+            "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest"],
+            "groupName": "all non-major dependencies",
+            "groupSlug": "all-minor-patch"
+        },
+        {
+            "description": "engines are minimums, not pins.",
+            "matchDepTypes": ["engines"],
+            "rangeStrategy": "auto"
+        },
+        {
+            "description": "Node majors: Dockerfile and .node-version move together.",
+            "matchDepNames": ["node"],
+            "matchUpdateTypes": ["major"],
+            "groupName": "Node.js"
+        },
+        {
+            "description": "openapi-typescript 7 needs the TypeScript 5 JS API (scripts/api-types.mjs).",
+            "matchFileNames": ["scripts/api-types.mjs"],
+            "matchDepNames": ["typescript"],
+            "allowedVersions": "<6"
+        },
+        {
+            "description": "Org reusable workflows follow the moving major tag @v1 (docs/ci.md in nick-lukashik/.github); never pin them to a digest.",
+            "matchManagers": ["github-actions"],
+            "matchDepNames": ["nick-lukashik/.github"],
+            "pinDigests": false
+        }
+    ],
+    "customManagers": [
+        {
+            "description": "Pinned `pnpm dlx` packages in scripts/api-types.mjs.",
+            "customType": "regex",
+            "managerFilePatterns": ["/^scripts/api-types\\.mjs$/"],
+            "matchStrings": ["--package=(?<depName>[a-z@/.-]+)@(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
+            "datasourceTemplate": "npm"
+        }
+    ]
+}

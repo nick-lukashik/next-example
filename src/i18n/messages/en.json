@@ -1,0 +1,101 @@
+{
+    "meta": {
+        "siteName": "Next Starter",
+        "languageName": "English",
+        "description": "A production-ready Next.js skeleton: TanStack Query against a REST API, SEO, strict CSP, English and Russian, tests.",
+        "ogAlt": "Next Starter — Next.js skeleton with working examples"
+    },
+    "nav": {
+        "skip": "Skip to content",
+        "label": "Main",
+        "home": "Home",
+        "notes": "Notes",
+        "language": "Language"
+    },
+    "footer": {
+        "version": "Version {version}",
+        "links": "Service links"
+    },
+    "home": {
+        "meta": {
+            "title": "Next Starter — Next.js skeleton with working examples",
+            "description": "Start a web app from a working skeleton: data from a REST API through TanStack Query, SEO, security headers, two languages and tests."
+        },
+        "heading": "A Next.js skeleton that already works",
+        "lead": "Every piece below is wired up and covered by tests. Read the code, keep what you need, delete the notes example when your first feature lands.",
+        "features": {
+            "data": "Backend calls through TanStack Query: server prefetch and hydration, an infinite list, an optimistic create with rollback, polling.",
+            "seo": "Titles and descriptions in both languages, canonical and hreflang links, Open Graph card, robots.txt, sitemap.xml, JSON-LD.",
+            "security": "Strict Content Security Policy with a nonce per request, security headers, same-origin API proxy.",
+            "i18n": "English and Russian without URL prefixes: a cookie remembers the choice, ?lang= switches it.",
+            "quality": "Biome, Vitest, Playwright with axe checks, Pino logs, health probes, Docker and CI."
+        },
+        "cta": "Open the notes example"
+    },
+    "notes": {
+        "meta": {
+            "title": "Notes",
+            "description": "Notes from the API: an infinite list, an optimistic create with rollback and stats that update after a create."
+        },
+        "heading": "Notes",
+        "lead": "Data comes from the API through TanStack Query. The first page is prefetched on the server, the next ones load on demand.",
+        "list": {
+            "title": "Latest notes",
+            "loading": "Loading notes…",
+            "empty": "No notes yet. Create the first one.",
+            "loadMore": "Load more",
+            "loadingMore": "Loading…",
+            "end": "That's all the notes.",
+            "error": "Could not load the notes.",
+            "retry": "Try again",
+            "saving": "Saving…"
+        },
+        "form": {
+            "title": "New note",
+            "titleLabel": "Title",
+            "titleHint": "1 to 200 characters.",
+            "bodyLabel": "Text",
+            "bodyHint": "Optional, up to 5000 characters.",
+            "submit": "Create note",
+            "submitting": "Creating…",
+            "invalid": "Check the highlighted fields.",
+            "errors": {
+                "title": "Enter a title of 1 to 200 characters.",
+                "body": "The text can be at most 5000 characters."
+            },
+            "created": "Note created",
+            "failed": "The note was not saved",
+            "failedDetails": "{message}. Request ID: {requestId}",
+            "rateLimited": "Too many requests. Wait a little and try again."
+        },
+        "stats": {
+            "title": "Stats",
+            "total": "Notes in total",
+            "lastHour": "Created in the last hour",
+            "updating": "Updating…",
+            "error": "Stats are unavailable right now."
+        },
+        "detail": {
+            "back": "All notes",
+            "createdAt": "Created <time>{date}</time>",
+            "emptyBody": "This note has no text."
+        }
+    },
+    "error": {
+        "title": "Something went wrong",
+        "body": "The page could not be shown. Try again; if it keeps failing, come back a little later.",
+        "retry": "Try again",
+        "home": "Go to the home page",
+        "digest": "Error ID: {digest}"
+    },
+    "notFound": {
+        "title": "Page not found",
+        "body": "There is no page at this address. It may have moved or never existed.",
+        "home": "Go to the home page",
+        "notes": "Open the notes"
+    },
+    "toast": {
+        "region": "Notifications",
+        "close": "Close"
+    }
+}
