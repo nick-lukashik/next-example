@@ -26,7 +26,35 @@ test.describe('language', () => {
         await expect(page.locator('html')).toHaveAttribute('lang', 'en')
     })
 
-    test('the language switch keeps the page', async ({ page }) => {
+    test('the language switch keeps the page and sets only the cookie', async ({ page, context }) => {
+        await page.goto('/notes?lang=en')
+        await page
+            .getByRole('navigation', {
+                name: en.nav.language,
+            })
+            .getByRole('link', {
+                name: ru.meta.languageName,
+            })
+            .click()
+        // Only the cookie changes: the address gets no ?lang=.
+        await expect(page).toHaveURL(/\/notes$/)
+        await expect(page.locator('html')).toHaveAttribute('lang', 'ru')
+        await expect(
+            page.getByRole('button', {
+                name: ru.notes.form.submit,
+            }),
+        ).toBeVisible()
+        const cookies = await context.cookies()
+        expect(cookies.find(cookie => cookie.name === 'locale')?.value).toBe('ru')
+    })
+})
+
+test.describe('without JavaScript', () => {
+    test.use({
+        javaScriptEnabled: false,
+    })
+
+    test('the language switch falls back to ?lang=', async ({ page }) => {
         await page.goto('/notes?lang=en')
         await page
             .getByRole('navigation', {
@@ -38,11 +66,6 @@ test.describe('language', () => {
             .click()
         await expect(page).toHaveURL(/\/notes\?lang=ru$/)
         await expect(page.locator('html')).toHaveAttribute('lang', 'ru')
-        await expect(
-            page.getByRole('button', {
-                name: ru.notes.form.submit,
-            }),
-        ).toBeVisible()
     })
 })
 
