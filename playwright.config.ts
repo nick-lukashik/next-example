@@ -107,6 +107,7 @@ export default defineConfig<BackendOptions>({
               }),
               site(NOINDEX_PORT, {
                   ROBOTS: 'noindex',
+                  GTM_ID: 'GTM-E2ETEST',
               }),
               site(API_DOWN_PORT, {
                   API_URL: `http://127.0.0.1:${DEAD_API_PORT}`,
