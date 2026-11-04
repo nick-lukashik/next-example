@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { LOCALE_COOKIE, LOCALE_HEADER, LOCALE_PARAM, localeCookieOptions } from '@/i18n/config'
 import { resolveLocale } from '@/i18n/resolve'
+import { serverEnv } from '@/lib/env/server'
 import { REQUEST_ID_HEADER, requestIdFrom } from '@/lib/request-id'
 import { buildCsp, createNonce, NONCE_HEADER } from '@/lib/security/csp'
 import { CANONICAL_HEADER, canonicalPath, PATHNAME_HEADER } from '@/lib/seo/alternates'
@@ -33,6 +34,7 @@ export function proxy(request: NextRequest) {
             nonce,
             dev: process.env.NODE_ENV === 'development',
             https,
+            analytics: Boolean(serverEnv.GTM_ID),
         })
         // Next.js reads the nonce from the request's CSP and puts it on its scripts.
         forwarded.set('content-security-policy', csp)
