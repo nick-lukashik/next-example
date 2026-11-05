@@ -35,7 +35,7 @@ const schema = z
         /** Budget for reading a request body the /api proxy forwards. */
         API_BODY_TIMEOUT_MS: unsetIfBlank(z.coerce.number().int().positive().default(10_000)),
         /** `noindex` (stage): robots.txt disallows everything, pages say noindex. */
-        /** Google Tag Manager container (GTM-ABC1234). Unset: no tag manager, and the CSP stays on this origin. */
+        /** Google Tag Manager container (GTM-ABC1234). Set: a consent banner, and the container after a yes. Unset: neither, and the CSP stays on this origin. */
         GTM_ID: unsetIfBlank(
             z
                 .string()
