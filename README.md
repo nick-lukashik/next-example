@@ -161,7 +161,7 @@ A real database keeps its data between runs, so the specs work with whatever is 
 | `APP_VERSION` | `dev` | at startup (`x-app-version` header) |
 | `LOG_LEVEL` | `info` | at startup |
 | `ROBOTS` | `index` | per request; `noindex` blocks indexing (stage) |
-| `GTM_ID` | none | per request; Google Tag Manager container (`GTM-ABC1234`). Unset: no tag manager, and the CSP stays on this origin. It loads on the first visit, and the banner can turn it off; the answer is `nl_consent`, on the whole domain |
+| `GTM_ID` | none | per request; Google Tag Manager container (`GTM-ABC1234`). Unset: no tag manager, and the CSP stays on this origin. It loads on every visit. The banner says so until "OK", which sets `nl_consent=true` for a year on the whole domain and does nothing else |
 | `OPENAPI_URL` | `e2e/mock-api/openapi.json` | by `pnpm api:types` only |
 
 ## Docker
