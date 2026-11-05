@@ -7,7 +7,7 @@ import { JsonLd } from '@/components/json-ld'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { type AppLocale, defaultLocale, isLocale, locales } from '@/i18n/config'
-import { CONSENT_COOKIE, consentAnswer } from '@/lib/analytics/consent'
+import { CONSENT_COOKIE, consentPressed } from '@/lib/analytics/consent'
 import { serverEnv } from '@/lib/env/server'
 import { NONCE_HEADER } from '@/lib/security/csp'
 import { CANONICAL_HEADER, languageAlternates, localizedPath, PATHNAME_HEADER } from '@/lib/seo/alternates'
@@ -126,7 +126,7 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
                     {serverEnv.GTM_ID ? (
                         <AnalyticsConsent
                             id={serverEnv.GTM_ID}
-                            answer={consentAnswer((await cookies()).get(CONSENT_COOKIE)?.value)}
+                            pressed={consentPressed((await cookies()).get(CONSENT_COOKIE)?.value)}
                         />
                     ) : null}
                 </NextIntlClientProvider>
