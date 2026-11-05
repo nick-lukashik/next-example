@@ -77,7 +77,7 @@ To use a real backend, point `API_URL` in `.env.local` at it. Production build l
 
 **Data.** Query options take the client as the first argument: Server Components pass `await serverApi()` (straight to `API_URL`), client components pass `browserApi` (through `/api`). Same key, same cache.
 
-**Locale.** `?lang=en|ru` > `locale` cookie > `Accept-Language` > `en`. `?lang=` rewrites the cookie. `src/proxy.ts` picks the locale and the server renders `<html lang>`. Canonical is `/path?lang=<locale>`, hreflang lists both, `x-default` is the path without the parameter.
+**Locale.** `?lang=en|ru` > `locale` cookie > `en`; the browser's language does not decide. `?lang=` rewrites the cookie. `src/proxy.ts` picks the locale and the server renders `<html lang>`. Canonical is `/path?lang=<locale>`, hreflang lists both, `x-default` is the path without the parameter.
 
 **UI and theme.** Components are shadcn/ui source in `src/components/ui/` (Radix primitives, `cn` from the `cn` package). One light palette: shadcn neutral tokens as CSS variables in `src/app/globals.css`. No theme switch, no `dark:` classes (a unit test rejects them, since components added later bring their own).
 
