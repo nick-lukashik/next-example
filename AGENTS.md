@@ -32,7 +32,7 @@ Read a library's file before working with it. The first line of each file names 
 
 ## Where things are
 
-- `src/proxy.ts`: every request but `/api/*` (Next.js would buffer those bodies) gets a request id and `x-app-version`; pages also get the nonce CSP, the locale (`?lang=` > cookie > `Accept-Language`) and `x-pathname` for metadata.
+- `src/proxy.ts`: every request but `/api/*` (Next.js would buffer those bodies) gets a request id and `x-app-version`; pages also get the nonce CSP, the locale (`?lang=` > cookie > English) and `x-pathname` for metadata.
 - `src/app/`: routes. `layout.tsx` holds shared metadata and JSON-LD; `notes/` is the TanStack Query example; `api/[...path]/route.ts` proxies the browser to the backend (1 MiB body cap, body and upstream deadlines, header allow-list); `health/live` and `health/ready` are the probes (ready reports the API, does not require it).
 - `src/lib/api/`: typed client. `schema.d.ts` (generated, never edit), `types.ts`, `client.ts`, `errors.ts` (`ApiError`), `notes.ts` (endpoints, keys, query options), `server.ts` / `browser.ts` (clients for server and browser).
 - `src/lib/query/`: `QueryClient`, a singleton in the browser and one per request on the server.
