@@ -57,6 +57,8 @@ test.describe('accessibility', () => {
             name: ru.toast.region,
         })
         await expect(toasts.getByText(ru.notes.form.failed)).toBeVisible()
+        // Settled: axe reads a colour mixed with the page while the toast fades in.
+        await expect(page.locator('[data-sonner-toast]')).toHaveCSS('opacity', '1')
         const results = await new AxeBuilder({
             page,
         })
