@@ -59,7 +59,7 @@ export function proxy(request: NextRequest) {
     response.headers.set('x-app-version', version)
     if (csp) response.headers.set('content-security-policy', csp)
     if (persistLocale) {
-        response.cookies.set(LOCALE_COOKIE, persistLocale, localeCookieOptions(https))
+        response.cookies.set(LOCALE_COOKIE, persistLocale, localeCookieOptions(https, serverEnv.SITE_URL))
     }
     return response
 }
