@@ -1,6 +1,6 @@
 Source: https://playwright.dev/docs/test-agents and the Skills shipped in node_modules/playwright-core/lib/tools/skills/ (playwright-cli, playwright-trace, playwright-component-testing). Rules condensed from those plus https://playwright.dev/docs/best-practices, https://playwright.dev/docs/test-webserver, https://playwright.dev/docs/accessibility-testing
 
-# Playwright Test 1.64 and @axe-core/playwright 4.14
+# Playwright Test 1.65 and @axe-core/playwright 4.14
 
 Official agent tooling. Optional, and the owner decides. Re-run both commands after a Playwright upgrade.
 - `npx playwright init-skills` copies the three shipped Skills into `.claude/skills/` (`--loop=agents` copies

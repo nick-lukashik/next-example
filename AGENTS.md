@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # next-example: rules for agents
 
-The full Next.js reference (not a template; new sites start from `next-starter`): Next.js 16.4 (App Router, `output: 'standalone'`, React Compiler, typed routes), React 19.3, TypeScript 7 (strict), Node 26, pnpm 12, TanStack Query 5, next-intl 4 (EN/RU, no locale in the URL), Zod 4, Tailwind 4, shadcn/ui (Radix), Pino, Biome, Vitest 5, Playwright 1.64 + axe. Backend: any API implementing the notes contract (`e2e/mock-api/openapi.json`); the bundled mock serves it for development and tests.
+The full Next.js reference (not a template; new sites start from `next-starter`): Next.js 16.4 (App Router, `output: 'standalone'`, React Compiler, typed routes), React 19.3, TypeScript 7 (strict), Node 26, pnpm 12, TanStack Query 5, next-intl 4 (EN/RU, no locale in the URL), Zod 4, Tailwind 4, shadcn/ui (Radix), Pino, Biome, Vitest 5, Playwright 1.65 + axe. Backend: any API implementing the notes contract (`e2e/mock-api/openapi.json`); the bundled mock serves it for development and tests.
 
 ## Library rules
 

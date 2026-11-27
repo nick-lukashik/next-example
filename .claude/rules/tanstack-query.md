@@ -1,9 +1,9 @@
 Source: https://tanstack.com/query/latest/llms.txt (official LLM docs index). Condensed from https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr, https://tanstack.com/query/latest/docs/framework/react/guides/query-options, https://tanstack.com/query/latest/docs/framework/react/guides/important-defaults, https://tanstack.com/query/latest/docs/framework/react/guides/migrating-to-v5
 
-# TanStack Query v5 (5.105)
+# TanStack Query v5 (5.108)
 
 TanStack's official skills loader is TanStack Intent (`npx @tanstack/intent@latest install`), but
-`@tanstack/react-query` 5.105 ships no skills, so there is nothing to install yet.
+`@tanstack/react-query` 5.108 ships no skills, so there is nothing to install yet.
 
 ## Where things live
 
