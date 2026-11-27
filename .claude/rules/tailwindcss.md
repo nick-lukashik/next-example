@@ -3,7 +3,7 @@ Source: official docs (summarized). https://tailwindcss.com/docs/installation/fr
 # Tailwind CSS 4.3
 
 Tailwind Labs publishes no agent rules, Skills or llms.txt. Class names below were checked by compiling them
-with the installed 4.3.3.
+with the installed 4.3.5.
 
 ## Setup (CSS-first)
 

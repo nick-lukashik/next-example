@@ -3,7 +3,7 @@ Source: official docs (summarized). https://biomejs.dev/reference/cli/, https://
 # Biome 2.6
 
 The Skills in Biome's repository are for Biome contributors, not users. Everything below was checked against
-the installed 2.6.4 (CLI help, `biome explain`, and `configuration_schema.json`).
+the installed 2.6.9 (CLI help, `biome explain`, and `configuration_schema.json`).
 
 Biome is the only linter and formatter here. Never add ESLint or Prettier (packages, configs, or
 `eslint-disable` / `prettier-ignore` comments).
